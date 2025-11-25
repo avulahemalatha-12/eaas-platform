@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  web:
+    image: node:22-bullseye
+    working_dir: /app
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - HOST=0.0.0.0
+      - CHOKIDAR_USEPOLLING=true
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
